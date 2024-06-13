@@ -12,7 +12,7 @@ category_information = {
         },
         "Learning Curve": {
             "acronym": "learning_curve",
-            "description": "Model performance with respect to the model evolution while getting to know the datapoints and their labels",
+            "description": "Model performance with respect to the model evolution while increasing number of seen datapoints",
             "parameters": [
                 "kinds: list[str], allowed strings in the list: 'train', 'test'"
             ],
@@ -21,7 +21,7 @@ category_information = {
             "acronym": "feature_relevance",
             "description": "How the model perceives the relevance of individual features. Based on the absolute sum of SHAP values over the test data.",
             "parameters": [
-                "individual_class: bool, If true, the Relevance is shown with respect to each possible model output. Otherwise, the prediction-independent relevance is shown"
+                "class: string, either the specific output class or 'all'"
             ],
         },
     },
@@ -30,8 +30,8 @@ category_information = {
             "acronym": "statistics",
             "description": "General statistics over the features/labels, like count, mean, ...",
             "parameters": [
-                "kind: str, either 'train' or 'test'",
-                "class_list: str | List[str], either 'all' or a list of the classes (numbers between 3 and 8)",
+                "kind: str, either 'train', 'test' or 'full'",
+                "class_list: str | List[str], either 'all' or a list of the classes",
                 "feature_list: str | List[str], either 'all' or a list of the features of interrest"
             ]
         },
@@ -40,7 +40,7 @@ category_information = {
             "description": "Distribution of the feature-values over the value range (histogram)",
             "parameters": [
                 "feature: str, feature to inspect",
-                "class_list: str | List[str], either 'all' or a list of the classes (numbers between 3 and 8)",
+                "class_list: str | List[str], either 'all' or a list of the classes",
                 "kind: str, either 'train' or 'test'",
                 "bins: int | str, either a number or 'auto' for automatic calculation of bins"
             ]

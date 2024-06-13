@@ -2,6 +2,8 @@ from openai import OpenAI
 import json
 from category_information import category_information
 
+feature_list = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar', 'chlorides', 'free sulfur dioxide', 'total sulfur dioxide', 'density', 'pH', 'sulphates', 'alcohol']
+
 class CategoryBot:
 
     def __init__(self, category: str) -> None:
@@ -16,8 +18,12 @@ class CategoryBot:
         categorized_information = category_information[category]
         
         self.intro = f"""You are a virtual assistant and help an expert to analyze a machine learning model with every request as good as you can. \
-                The ML model is specialized in answering questions about the quality of wine based \
-                on given chemical properties. \
+                The ML model is specialized in answering questions about the quality of wine based on given chemical properties. \
+                
+                The dataset contains the following features: \
+                {feature_list}
+
+                The labels are quality scores between 1 and 10. Due to limitations of the data, the labels contain only scores between 3 and 8.
                 
                 You are specialized in answering questions concerning the {specialization}. \
                 

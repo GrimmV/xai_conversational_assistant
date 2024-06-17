@@ -1,7 +1,8 @@
 from openai import OpenAI
 import json
+from Bot import Bot
 
-class GeneralBot:
+class GeneralBot(Bot):
 
     def __init__(self) -> None:
 
@@ -17,7 +18,7 @@ class GeneralBot:
         """
 
         self.output_definition = """\n \
-                Provide an answer in JSON format containing a list of the keys from the dictionary above and your parameter choice: \
+                Provide an answer in JSON format: \
         
                 {
                     response: string 
@@ -33,13 +34,14 @@ class GeneralBot:
 
         return self.intro + request + self.output_definition
     
-    def handle_request(self, request="How does the model perform?"):
+    def handle_request(self, request="How does the model perform?", history=[]):
 
         response = self.llm.chat.completions.create(
             model=self.model,
             response_format={"type": "json_object"},
             messages=[
                 {"role": "system", "content": self.full_prompt},
+                {"role": "system", "content": self.get_history(history)},
                 {"role": "user", "content": request},
             ],
         )

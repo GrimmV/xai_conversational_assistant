@@ -1,8 +1,9 @@
 from openai import OpenAI
 import json
+from Bot import Bot
 
 
-class ResponseBot:
+class ResponseBot(Bot):
 
     def __init__(self) -> None:
 
@@ -34,18 +35,23 @@ class ResponseBot:
     def construct_prompt(self, data):
 
         return self.intro + json.dumps(data) + self.output_definition
-    
-    def handle_request(self, request="How does the model perform?", data=[]):
+
+    def handle_request(
+        self, request="How does the model perform?", data=[], history=[]
+    ):
+        messages = [
+            {"role": "system", "content": self.construct_prompt(data)},
+            {"role": "system", "content": self.get_history(history)},
+            {"role": "user", "content": request},
+        ]
 
         response = self.llm.chat.completions.create(
             model=self.model,
             response_format={"type": "json_object"},
-            messages=[
-                {"role": "system", "content": self.construct_prompt(data)},
-                {"role": "user", "content": request},
-            ],
+            messages=messages,
         )
 
         output = response.choices[0].message.content
+        print(messages)
 
         return json.loads(output)

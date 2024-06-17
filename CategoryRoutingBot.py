@@ -1,13 +1,17 @@
 from openai import OpenAI
 import json
+from Bot import Bot
 
 categories = {
     "General": "Answering general questions about machine learning and explainable AI that are independent of the data and model",
+    "Guidance": "Providing assistance on how to proceed",
     "Model": "Answering questions about the model",
-    "Data": "Answering questions about the data"
+    "Data": "Answering questions about the data",
+    "Prediction": "Answering questions about the individual prediction",
+    "Context": "Answering questions about the context of the individual prediction"
 }
 
-class CategoryRoutingBot:
+class CategoryRoutingBot(Bot):
 
     def __init__(self) -> None:
 
@@ -40,13 +44,14 @@ class CategoryRoutingBot:
 
         return self.intro + request + self.output_definition
     
-    def handle_request(self, request="How does the model perform?"):
+    def handle_request(self, request="How does the model perform?", history=[]):
 
         response = self.llm.chat.completions.create(
             model=self.model,
             response_format={"type": "json_object"},
             messages=[
                 {"role": "system", "content": self.full_prompt},
+                {"role": "system", "content": self.get_history(history)},
                 {"role": "user", "content": request},
             ],
         )

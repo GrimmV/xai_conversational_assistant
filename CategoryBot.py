@@ -1,10 +1,11 @@
 from openai import OpenAI
 import json
 from category_information import category_information
+from Bot import Bot
 
 feature_list = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar', 'chlorides', 'free sulfur dioxide', 'total sulfur dioxide', 'density', 'pH', 'sulphates', 'alcohol']
 
-class CategoryBot:
+class CategoryBot(Bot):
 
     def __init__(self, category: str) -> None:
 
@@ -15,6 +16,10 @@ class CategoryBot:
             specialization = "ML model"
         elif category == "Data":
             specialization = "underlying data"
+        elif category == "Prediction":
+            specialization = "individual model prediction"
+        elif category == "Context":
+            specialization = "context of the model prediction"
         categorized_information = category_information[category]
         
         self.intro = f"""You are a virtual assistant and help an expert to analyze a machine learning model with every request as good as you can. \
@@ -33,7 +38,7 @@ class CategoryBot:
         """
 
         self.output_definition = """\n \
-                Provide an answer in JSON format containing a list of the keys from the dictionary above and your parameter choice: \
+                Provide an answer in JSON format containing the key-value pairs based on the keys from the dictionary above and your parameter choice: \
         
                 {
                     response: {
@@ -55,13 +60,14 @@ class CategoryBot:
 
         return self.intro + request + self.output_definition
     
-    def handle_request(self, request="How does the model perform?"):
+    def handle_request(self, request="How does the model perform?", history=[]):
 
         response = self.llm.chat.completions.create(
             model=self.model,
             response_format={"type": "json_object"},
             messages=[
                 {"role": "system", "content": self.full_prompt},
+                {"role": "system", "content": self.get_history(history)},
                 {"role": "user", "content": request},
             ],
         )

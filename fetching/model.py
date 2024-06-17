@@ -14,7 +14,11 @@ def get_data(directory, key_word, params):
         else:
             expanded_params.append((key, value))
     
-    url = f'{base_url}{base_path}/{directory}/{key_word}?' + urllib.parse.urlencode(expanded_params)
+    expanded_params.append(("index", "1"))
+
+    if key_word == "datapoint":
+        directory = "data"
+    url = f'{base_url}{base_path}/{directory.lower()}/{key_word.lower()}?' + urllib.parse.urlencode(expanded_params)
     print(url)
     data_raw = requests.get(url)
     data_raw.raise_for_status()

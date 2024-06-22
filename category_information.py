@@ -1,38 +1,32 @@
 category_information = {
     "Model": {
         "Confusion Matrix": {
-            "acronym": "confusion",
             "description": "Actual labels in relation to the model predictions",
             "parameters": ["kind: str, either 'train' or 'test'"],
         },
         "Performance Metrics": {
-            "acronym": "scores",
             "description": "Model performance metrics that show f1-score, precision and recall",
             "parameters": ["kind: str, either 'train' or 'test'"],
         },
         "Learning Curve": {
-            "acronym": "learning_curve",
             "description": "Model performance with respect to the model evolution while increasing number of seen datapoints",
             "parameters": [
                 "kinds: list[str], allowed strings in the list: 'train', 'test'"
             ],
         },
         "Feature Relevance": {
-            "acronym": "feature_relevance",
             "description": "How the model perceives the relevance of individual features. Based on the absolute sum of SHAP values over the test data.",
             "parameters": ["class: string, either the specific output class or 'all'"],
         },
     },
     "Data": {
         "Datapoint": {
-            "acronym": "datapoint",
             "description": "Individual datapoint under investigation and model prediction",
             "parameters": [
                 "with_impact: bool, if you fetch additional feature impact information based on shap values",
             ],
         },
         "Statistics": {
-            "acronym": "statistics",
             "description": "General statistics over the features/labels, like count, mean, ...",
             "parameters": [
                 "kind: str, either 'train', 'test' or 'full'",
@@ -41,7 +35,6 @@ category_information = {
             ],
         },
         "Distribution": {
-            "acronym": "distribution",
             "description": "Distribution of the feature-values over the value range (histogram)",
             "parameters": [
                 "feature: str, feature to inspect",
@@ -51,7 +44,6 @@ category_information = {
             ],
         },
         "Correlation": {
-            "acronym": "correlation",
             "description": "Description of the correlation between each two individual features",
             "parameters": [
                 "kind: str, either 'train', 'test' or 'full'",
@@ -60,33 +52,28 @@ category_information = {
     },
     "Prediction": {
         "Datapoint": {
-            "acronym": "datapoint",
             "description": "Individual datapoint under investigation and model prediction",
             "parameters": [
                 "with_impact: bool, if you fetch additional feature impact information based on shap values",
             ],
         },
         "Probabilities": {
-            "acronym": "probabilities",
             "description": "The probabilities of different predictions being correct based on the model.",
             "parameters": None,
         },
         "Trustscore": {
-            "acronym": "trustscore",
             "description": "The trustscore for the given class, closest class that was not predicted and the percentile of this trustscore among all trustscores in the dataset",
             "parameters": None,
         },
     },
     "Context": {
         "Datapoint": {
-            "acronym": "datapoint",
             "description": "Individual datapoint under investigation and model prediction",
             "parameters": [
                 "with_impact: bool, if you fetch additional feature impact information based on shap values",
             ],
         },
         "Context": {
-            "acronym": "context",
             "description": "Condensed information about an individual feature value for a prediction and how it is embedded in the prediction space. \
                 Contains feature value, overall feature distribution, anchor rules, prediction-based feature distribution, and shap value with respect to the chosen class",
             "parameters": [

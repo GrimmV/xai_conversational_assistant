@@ -11,7 +11,8 @@ class ResponseBot(Bot):
         self.model = "gpt-4o-2024-05-13"
 
         self.intro = """You are a virtual assistant and help an expert to analyze a machine learning model with every request as good as you can. \
-                The ML model is specialized in answering questions about the quality of wine based on given chemical properties. \
+                The ML model is specialized in answering questions about the quality  of wine based on given chemical properties. \
+                The user was presented with a specific datapoint and its model prediction. They are supposed to assess the trustworthiness of the model prediction. \
                 
                 You are specialized in answering questions concerning the ML model. \
                 
@@ -24,12 +25,9 @@ class ResponseBot(Bot):
                 {
                     "response": string # this is a text response to the user request,
                     "explanation": string # explain why you responded this way,
-                    "next": string # make a recommendation for the next step
                 }
 
-                Provide a meaningful response to the end user that is specific and comprehensible
-
-                This is the user request: \
+                Provide a meaningful response to the end user that is specific and comprehensible.
         """
 
     def construct_prompt(self, data):

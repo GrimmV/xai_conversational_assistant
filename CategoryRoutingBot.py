@@ -5,9 +5,9 @@ from Bot import Bot
 categories = {
     "General": "Answering general questions about machine learning and explainable AI that are independent of the data and model",
     "Guidance": "Providing assistance on how to proceed",
-    "Model": "Answering questions about the model",
-    "Data": "Answering questions about the data",
-    "Prediction": "Answering questions about the individual prediction",
+    "Model": "Answering questions about the model and its behaviour",
+    "Data": "Answering questions about the underlying data and its structure",
+    "Prediction": "Answering questions about the individual prediction under discussion",
     "Context": "Answering questions about the context of the individual prediction"
 }
 
@@ -20,8 +20,9 @@ class CategoryRoutingBot(Bot):
 
         
         self.intro = f"""You are a virtual assistant and help an expert to analyze a machine learning model with every request as good as you can. \
-                The ML model is specialized in answering questions about the quality of wine based \
-                on given chemical properties. Categorize the request of the user into one of the following categories to navigate to a specialized assistant for the category:\
+                The ML model is specialized in answering questions about the quality of wine based on given chemical properties. \
+                The user was presented with a specific datapoint and its model prediction. They are supposed to assess the trustworthiness of the model prediction. \
+                Categorize the request of the user into one of the following categories to navigate to a specialized assistant for the category:\
                 
                 {categories} \
                 

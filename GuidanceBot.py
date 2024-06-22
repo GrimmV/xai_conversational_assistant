@@ -59,15 +59,9 @@ class GuidanceBot(Bot):
                     response: string
                     explanation: string # Why did you choose to respond in this way?
                 }
-
-                This is the user request: \
         """
 
         self.full_prompt = self.intro + self.output_definition
-
-    def construct_prompt(self, request):
-
-        return self.intro + request + self.output_definition
     
     def handle_request(self, request="How does the model perform?", history=[]):
 

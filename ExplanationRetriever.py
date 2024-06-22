@@ -1,3 +1,5 @@
+from acronyms import acronyms
+
 explanation = {
     "confusion": "Contains the number of occurrences for each label-prediction pair",
     "learning_curve": "Contains information about how the train and test score (f1-score) changed throughout the training process",
@@ -21,4 +23,5 @@ class ExplanationRetriever:
         pass
 
     def get_explanation(self, key):
-        return explanation[key.lower()]
+        acronym = acronyms[key]
+        return explanation[acronym]

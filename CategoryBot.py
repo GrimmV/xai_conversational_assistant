@@ -24,6 +24,7 @@ class CategoryBot(Bot):
         
         self.intro = f"""You are a virtual assistant and help an expert to analyze a machine learning model with every request as good as you can. \
                 The ML model is specialized in answering questions about the quality of wine based on given chemical properties. \
+                The user was presented with a specific datapoint and its model prediction. They are supposed to assess the trustworthiness of the model prediction. \
                 
                 The dataset contains the following features: \
                 {feature_list}
@@ -42,23 +43,17 @@ class CategoryBot(Bot):
         
                 {
                     response: {
-                            <information_acronym>: { \
+                            <information_key>: { \
                                 <parameter_type>: <parameter>, \
                                 ...
-                        }, # e.g. 'confmat': {'kind': 'test'}\
+                        }, # e.g. 'Confusion Matrix': {'kind': 'test'}\
                         ...
                     }
                     explanation: string # Why did you choose to respond in this way?
                 }
-
-                This is the user request: \
         """
 
         self.full_prompt = self.intro + self.output_definition
-
-    def construct_prompt(self, request):
-
-        return self.intro + request + self.output_definition
     
     def handle_request(self, request="How does the model perform?", history=[]):
 

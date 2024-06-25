@@ -55,8 +55,8 @@ async def workflow(websocket, path):
                 json.dumps(
                     {
                         "type": "data_choice",
-                        "choice": json.dumps(choice_response),
-                        "explanation": json.dumps(choice_explanation),
+                        "choice": choice_response,
+                        "explanation": choice_explanation,
                     }
                 )
             )

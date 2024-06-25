@@ -42,14 +42,17 @@ class GuidanceBot(Bot):
 
         
         self.intro = f"""You are a virtual assistant and help an expert to analyze a machine learning model with every request as good as you can. \
-                The ML model is specialized in answering questions about the quality of wine based \
-                on given chemical properties. \
+                The ML model is specialized in answering questions about the quality of wine based on given chemical properties. \
                 
                 You are specialized helping to guide the user by providing suggestions for next steps. \
                 
                 There are the following thematic categories for the user and the available data to answer user requests: \
 
                 {categories}
+
+                While not strict, try to guide the user in the following pattern: Data inspection > Model inspection > Prediction inspection > Prediction context inspection.
+
+                If the user conducted the analysis of the prediction and prediction context, recommend them to make a judgment in the "Make Judgement" tab. 
         """
 
         self.output_definition = """\n \

@@ -45,7 +45,6 @@ async def workflow(websocket, path):
                 json.dumps({"type": "status", "text": "Looking for relevant data..."})
             )
             category_bot = CategoryBot(category)
-            guidance_bot = GuidanceBot()
             data_choice = await loop.run_in_executor(
                 None, category_bot.handle_request, request, history
             )
@@ -67,6 +66,7 @@ async def workflow(websocket, path):
                 # In case one type of data is supposed to be retrieved with several parameter configurations
                 if isinstance(params, list):
                     for param in params:
+                        print(param)
                         data.append(
                             {
                                 "data": await loop.run_in_executor(
@@ -109,34 +109,10 @@ async def workflow(websocket, path):
                     }
                 )
             )
-            await websocket.send(
-                json.dumps({"type": "status", "text": "Considering recommendation for next steps..."})
-            )
 
-            suggestion_request = (
-                f"most recent request: {request}, most recent response: {response}"
-            )
+            new_history = f"chosen category: {category}, chosen data: {choice_response}, answer: {response}"
 
-            next_suggestion = await loop.run_in_executor(
-                None, guidance_bot.handle_request, suggestion_request, history
-            )
-
-            next_response = next_suggestion["response"]
-            next_explanation = next_suggestion["explanation"]
-
-            await websocket.send(
-                json.dumps(
-                    {
-                        "type": "next",
-                        "response": next_response,
-                        "explanation": next_explanation,
-                    }
-                )
-            )
-
-            history.append(
-                f"chosen category: {category}, chosen data: {choice_response}, answer: {response}, recommendation for next steps: {next_response}"
-            )
+            history.append(new_history)
             if len(history) > max_history:
                 history.pop(0)
 

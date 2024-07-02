@@ -5,6 +5,8 @@ from acronyms import acronyms
 base_url = "http://localhost:5001"
 base_path = "/api/v1"
 
+default_dp = "4"
+
 def get_data(directory, key_word, params):
     # Convert list values in params to repeated parameters
     expanded_params = []
@@ -15,13 +17,13 @@ def get_data(directory, key_word, params):
         else:
             expanded_params.append((key, value))
     
-    expanded_params.append(("index", "1"))
+    expanded_params.append(("index", default_dp))
 
     acronym = acronyms[key_word]
 
     if acronym == "datapoint":
         directory = "data"
-    if acronym == "context":
+    if acronym == "context" or acronym == "trustscore" or acronym == "probabilities":
         directory = "xai"
     url = f'{base_url}{base_path}/{directory.lower()}/{acronym}?' + urllib.parse.urlencode(expanded_params)
     print(url)

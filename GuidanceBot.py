@@ -50,23 +50,27 @@ class GuidanceBot(Bot):
 
                 {categories}
 
-                While not strict, try to guide the user in the following pattern: Data inspection > Model inspection > Prediction inspection > Prediction context inspection.
+                Guide the user in the following pattern: Data inspection > Model inspection > Prediction inspection > Prediction context inspection, e.g. \
+                if the user has done model inspection, encourage them to go for prediction inspection
 
                 If the user conducted the analysis of the prediction and prediction context, recommend them to make a judgment in the "Make Judgement" tab. 
+
+                Do not provide any guidance with respect to the manipulation of the data. The user is not able to manipulate data. \
+                You are only providing guidance for the purpose of inspection.
         """
 
         self.output_definition = """\n \
                 Provide an answer in JSON format: \
         
                 {
-                    response: string
+                    response: string # how is the user supposed to proceed?
                     explanation: string # Why did you choose to respond in this way?
                 }
         """
 
         self.full_prompt = self.intro + self.output_definition
     
-    def handle_request(self, request="How does the model perform?", history=[]):
+    def handle_request(self, request="How does the model perform?", history=[], ):
 
         response = self.llm.chat.completions.create(
             model=self.model,

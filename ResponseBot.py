@@ -50,6 +50,5 @@ class ResponseBot(Bot):
         )
 
         output = response.choices[0].message.content
-        print(messages)
 
         return json.loads(output)

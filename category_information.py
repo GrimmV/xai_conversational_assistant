@@ -20,6 +20,10 @@ category_information = {
         },
     },
     "Data": {
+        "Descriptions": {
+            "description": "Descriptions about how the data was collected, descriptions for each individual feature and the labels",
+            "parameters": None
+        },
         "Datapoint": {
             "description": "Individual datapoint under investigation and model prediction",
             "parameters": [
@@ -67,17 +71,11 @@ category_information = {
         },
     },
     "Context": {
-        "Datapoint": {
-            "description": "Individual datapoint under investigation and model prediction",
-            "parameters": [
-                "with_impact: bool, if you fetch additional feature impact information based on shap values",
-            ],
-        },
         "Context": {
             "description": "Condensed information about an individual feature value for a prediction and how it is embedded in the prediction space. \
                 Contains feature value, overall feature distribution, anchor rules, prediction-based feature distribution, and shap value with respect to the chosen class",
             "parameters": [
-                "feature: str, name of the feature to focus on",
+                "feature: str, name of the feature to focus on. If 'auto', the feature with the highest impact is chosen.",
                 "class: str, class to focus on. If 'auto', the model prediction of the datapoint at hand is used for class.",
             ],
         }

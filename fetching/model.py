@@ -5,7 +5,7 @@ from acronyms import acronyms
 base_url = "http://localhost:5001"
 base_path = "/api/v1"
 
-default_dp = "4"
+default_dp = "34"
 
 def get_data(directory, key_word, params):
     # Convert list values in params to repeated parameters

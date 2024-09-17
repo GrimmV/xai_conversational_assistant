@@ -10,4 +10,5 @@ acronyms = {
     "Probabilities": "probabilities",
     "Trustscore": "trustscore",
     "Context": "context",
+    "Descriptions": "descriptions"
 }

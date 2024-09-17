@@ -5,6 +5,7 @@ from ResponseBot import ResponseBot
 from GuidanceBot import GuidanceBot
 from ExplanationRetriever import ExplanationRetriever
 from fetching.model import get_data
+from acronyms import acronyms
 
 import asyncio
 import websockets
@@ -141,13 +142,24 @@ async def handle_data_choice(websocket, category, request, history, loop, thread
 
 async def handle_data_append(data, category, key, param, loop):
     explanation_retriever = ExplanationRetriever()
+    available_keys = acronyms.keys()
+    validated_key = None
+    if key not in available_keys:
+        for my_key in available_keys:
+            if my_key in key:
+                validated_key = my_key
+                break
+    else:
+        validated_key = key
+    if validated_key == None:
+        return data
     data.append(
         {
             "data": await loop.run_in_executor(
-                None, get_data, category.lower(), key, param
+                None, get_data, category.lower(), validated_key, param
             ),
             "explanation": await loop.run_in_executor(
-                None, explanation_retriever.get_explanation, key
+                None, explanation_retriever.get_explanation, validated_key
             ),
         }
     )

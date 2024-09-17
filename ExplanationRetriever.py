@@ -12,7 +12,8 @@ explanation = {
     "context": "Condensed information about an individual feature value for a prediction and how it is embedded in the prediction space. \
                 Contains feature value, overall feature distribution, anchor rules, prediction-based feature distribution, and shap value with respect to the chosen class",
     "trustscore": "Trustscore for the given class, closest class that was not predicted and the percentile of this trustscore among all trustscores in the dataset",
-    "probabilities": "Probabilities of different predictions being correct based on the model"
+    "probabilities": "Probabilities of different predictions being correct based on the model",
+    "descriptions": "Descriptions about how the data was collected, descriptions for each individual feature and the labels"
 }
 
 

@@ -13,7 +13,6 @@ import json
 
 max_history = 5
 
-
 async def workflow(websocket, path):
     loop = asyncio.get_event_loop()
     history = {}
